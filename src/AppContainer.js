@@ -35,7 +35,7 @@ import LoginApp from './LoginApp';
 const AppContainer = () => {
   return (
     <Grid container>
-      <Grid item xs={4} sx={{ margin: "3rem auto" , boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", height:"90vh", borderRadius:'10px', minWidth:"280px"}}>
+      <Grid item xs={12} sm={4}  className="app-layout">
 <LoginApp/>
       </Grid>
     </Grid>
