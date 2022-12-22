@@ -34,7 +34,7 @@ import LoginApp from "./LoginApp";
 const AppContainer = () => {
   return (
     <Grid container>
-      <Grid item xs={12} sm={4} className="app-layout">
+      <Grid item xs={12}>
         <LoginApp />
       </Grid>
     </Grid>

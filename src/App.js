@@ -1,22 +1,26 @@
-import './App.css';
+import "./App.css";
 
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import LoginApp from './LoginApp';
-import AppContainer from './AppContainer';
-import Home from './Home'
+import React, { Component } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import LoginApp from "./LoginApp";
+import AppContainer from "./AppContainer";
+import Home from "./Home";
+import { Grid } from "@mui/material";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route exact path='/' element={< AppContainer />}></Route>
-          <Route exact path='/login' element={< LoginApp />}></Route>
-          <Route exact path='/home' element={< Home />}></Route>
-        </Routes>
-      </Router>
-
+      <Grid container>
+        <Grid item xs={12} sm={4} className="app-layout">
+          <Router>
+            <Routes>
+              <Route exact path="/" element={<AppContainer />}></Route>
+              <Route exact path="/login" element={<LoginApp />}></Route>
+              <Route exact path="/home" element={<Home />}></Route>
+            </Routes>
+          </Router>
+        </Grid>
+      </Grid>
     </div>
   );
 }

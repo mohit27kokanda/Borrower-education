@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // import FormControlLabel from '@mui/material/FormControlLabel'
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -35,6 +36,7 @@ import {
 } from "@mui/material";
 import logo from "./img/Logo.svg";
 const LoginApp = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <Grid container sx={{}} className="login-continer">
@@ -136,14 +138,14 @@ const LoginApp = () => {
                 <span style={{ color: "#1890FF" }}>Resend OTP</span>
               </Typography>
             </Grid>
-            <Grid item xs={12} sx={{ mt: { xs: 4, sm:6} }}>
+            <Grid item xs={12} sx={{ mt: { xs: 4, sm: 6 } }}>
               <Typography gutterBottom>
                 <span style={{ color: "#555770" }}>Don’t Have an account ?</span>
                 <span style={{ color: "#1890FF" }}>Create an account</span>
               </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 2, textAlign: "center" }}>
-              <Button variant="contained" color="primary">
+              <Button onClick={()=>navigate("/home")} variant="contained" color="primary">
                 Proceed
               </Button>
             </Grid>
