@@ -1,57 +1,49 @@
 body {
   margin: 0;
 
-  font-family: 'Roboto';
-font-style: normal;
-
+  font-family: "Roboto";
+  font-style: normal;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-.login-helper{
+.login-helper {
   font-weight: 500;
-font-size: 14px;
-line-height: 125.5%;
-/* or 25px */
+  font-size: 14px;
+  line-height: 125.5%;
+  /* or 25px */
 
-text-align: center;
+  text-align: center;
 
-/* Black */
+  /* Black */
 
-color: #535353;
-
-
+  color: #535353;
 }
-.app-layout{
+.app-layout {
   margin: 3rem auto !important;
 
-   box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-   height:90vh;
-    border-radius:10px;
-   
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  min-height: 90vh;
+  border-radius: 10px;
 }
-.login-continer{
-  margin-top: 9rem
+.login-continer {
+  margin-top: 9rem;
 }
 @media screen and (max-width: 480px) {
-  .app-layout{
+  .app-layout {
     margin: 0;
-    box-shadow:none;
-    height:100%;
-     border-radius:10px;
-  
-  
-     height:"100%";
-  
+    box-shadow: none;
+    height: 100%;
+    border-radius: 10px;
+
+    height: "100%";
   }
-  .login-continer{
-    margin-top: 4rem
+  .login-continer {
+    margin-top: 4rem;
   }
 
-
-  .login-helper{
-    padding:10px  80px;
+  .login-helper {
+    padding: 10px 80px;
   }
 }
