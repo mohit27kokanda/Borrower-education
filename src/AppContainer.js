@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 import {
   Drawer,
@@ -29,17 +29,16 @@ import {
   FormHelperText,
   Tooltip,
 } from "@mui/material";
-import LoginApp from './LoginApp';
-
+import LoginApp from "./LoginApp";
 
 const AppContainer = () => {
   return (
     <Grid container>
-      <Grid item xs={12} sm={4}  className="app-layout">
-<LoginApp/>
+      <Grid item xs={12} sm={4} className="app-layout">
+        <LoginApp />
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default AppContainer
+export default AppContainer;
