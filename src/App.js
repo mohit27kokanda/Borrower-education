@@ -11,9 +11,8 @@ function App() {
       <Router>
       
 
-      <AppContainer/>
       <Routes>
-                 <Route exact path='/' element={< LoginApp />}></Route>
+                 <Route exact path='/' element={< AppContainer/>}></Route>
                  <Route exact path='/login' element={< LoginApp />}></Route>
                  {/* <Route exact path='/contact' element={< Contact />}></Route> */}
           </Routes>
