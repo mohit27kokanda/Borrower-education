@@ -383,7 +383,7 @@ const LoanDetails = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItem button onClick={() => navigate("/settlement", {principal_outstanding_amount})}>
+            <ListItem button onClick={() => navigate("/settlement")}>
               <ListItemText primary="Raise Settlement Request" />
               <IconButton
                 edge="start"
