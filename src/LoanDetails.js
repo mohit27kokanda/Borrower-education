@@ -66,31 +66,34 @@ const Transition = (props) => {
 const LoanDetails = () => {
   const [isBottomSheetOpen, setisBottomSheetOpen] = useState(false);
   const [isPayNowOpen, setisPayNowOpen] = useState(false);
-
+  const [isBillerOpen, setisBillerOpen] = useState(false);
   const navigate = useNavigate();
-  const [loanDetails, setLoanDetails] = useState([])
-  const userDetails = JSON.parse(localStorage.getItem("user"))
-  const loanId = localStorage.getItem('loanId')
+  const [loanDetails, setLoanDetails] = useState([]);
+  const userDetails = JSON.parse(localStorage.getItem("user"));
+  const loanId = localStorage.getItem("loanId");
 
   // useEffect(()=>{}, [])
 
   useEffect(() => {
     console.log("useEffect");
-    loadPage(loanId)
-  }, [])
-  
+    loadPage(loanId);
+  }, []);
+
   const loadPage = async (loanId) => {
-    const loanData = await getLoanDetails(loanId)
-    console.log(loanData)
-    const formattedData = Object.keys(loanData ||{}).map((key)=> ({key: snakeCaseToTitleCase(key), value: loanData[key]}))
-    setLoanDetails(formattedData)
-  }
+    const loanData = await getLoanDetails(loanId);
+    console.log(loanData);
+    const formattedData = Object.keys(loanData || {}).map((key) => ({
+      key: snakeCaseToTitleCase(key),
+      value: loanData[key],
+    }));
+    setLoanDetails(formattedData);
+  };
 
   const snakeCaseToTitleCase = (str) =>
-  str
-    .split("_")
-    .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
-    .join(" ");
+    str
+      .split("_")
+      .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
+      .join(" ");
 
   const hideBottom = () => {
     setisBottomSheetOpen(false);
@@ -98,6 +101,10 @@ const LoanDetails = () => {
   const hideBottomPayNow = () => {
     setisPayNowOpen(false);
   };
+  const hideBottomBiller = () => {
+    setisBillerOpen(false);
+  };
+  const options = ["a", "b"];
 
   // const bottomSheet = () => ;
   return (
@@ -119,7 +126,9 @@ const LoanDetails = () => {
                     px: 1,
                   }}
                 >
-                  <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>{key+": "}</span>
+                  <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>
+                    {key + ": "}
+                  </span>
                   <span style={{ color: "#00000", fontWeight: 600 }}>{value}</span>
                 </Typography>
               </Grid>
@@ -261,7 +270,9 @@ const LoanDetails = () => {
             <Button
               sx={{ float: "right", mr: 2 }}
               variant="contained"
-              onClick={() => setisPayNowOpen(!isPayNowOpen)}
+              onClick={() => {
+                false ? setisPayNowOpen(!isPayNowOpen) : setisBillerOpen(!isBillerOpen);
+              }}
             >
               Pay Now
             </Button>
@@ -418,6 +429,87 @@ const LoanDetails = () => {
                   </Button>
                 </Grid>
               </Grid>
+            </Grid>
+          </Grid>
+        </Dialog>
+      </Box>
+      <Box sx={{ maxWidth: "400px" }}>
+        <Dialog
+          fullScreen
+          sx={{
+            // mt: "22rem",
+            mt: "auto",
+            mb: { sm: "3rem", xs: "0" },
+            maxWidth: { sm: "550px", xs: "100%" },
+            maxHeight: "350px",
+            mx: "auto",
+            borderRadius: "10px",
+          }}
+          open={isBillerOpen}
+          onClose={hideBottomBiller}
+          TransitionComponent={Transition}
+        >
+          <List>
+            <ListItem button>
+              <ListItemText secondary="Pay Now" />
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={hideBottomBiller}
+                sx={{ float: "right" }}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+            </ListItem>
+            <Divider />
+          </List>
+          <Grid item container sx={{ px: 2 }}>
+            <Grid item xs={12}>
+              {" "}
+              <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                sx={{ width: "95%", mt: 2 }}
+                size="small"
+                w
+                disableClearable
+                options={options}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Select Bank"
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                    }}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                size={"small"}
+                label={"Enter Account Number"}
+                sx={{ width: "95%", mt: 2 }}
+                type="text"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                size={"small"}
+                sx={{ width: "95%", mt: 2 }}
+                type="date"
+                inputProps={{ step: 300 }}
+                label={"Enter IFSC Code"}
+                InputLabelProps={{ shrink: true }}
+              />
+            </Grid>
+
+            <Grid item xs={12} sx={{ textAlign: "center" }}>
+              <Button sx={{ mt: 2, mr: 3 }} variant="contained">
+                Add Biller
+              </Button>
             </Grid>
           </Grid>
         </Dialog>
