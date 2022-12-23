@@ -6,6 +6,7 @@ import LoginApp from "./LoginApp";
 import AppContainer from "./AppContainer";
 import Home from "./Home";
 import { Grid } from "@mui/material";
+import LoanDetails from "./LoanDetails";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Router>
             <Routes>
               <Route exact path="/" element={<AppContainer />}></Route>
-              <Route exact path="/login" element={<LoginApp />}></Route>
+              <Route exact path="/loan-details" element={<LoanDetails />}></Route>
               <Route exact path="/home" element={<Home />}></Route>
             </Routes>
           </Router>

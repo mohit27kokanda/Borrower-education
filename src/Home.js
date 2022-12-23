@@ -39,107 +39,127 @@ import TimerIcon from "@mui/icons-material/Timer";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import SpeedIcon from "@mui/icons-material/Speed";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const LoanCard = () => (
     <Grid
       container
       sx={{ background: "#FAFAFA", border: "1px solid #DDDDDD", borderRadius: "4px", mt: 1 }}
     >
-      <Stack sx={{}}>
-        <Box sx={{ pt: 1 }}>
-          <Typography
-            sx={{
-              fontWeight: 500,
-              fontSize: "14px",
-              lineHeight: "18px",
-              color: "#535353",
-              px: 1,
-            }}
-          >
-            Rakshit Walia
-          </Typography>
-        </Box>
-        <Box>
-          <Typography
-            sx={{
-              fontSize: "14px",
-              px: 1,
-            }}
-          >
-            <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>Amount Due:</span>
-            <span style={{ color: "#00000", fontWeight: 600 }}>₹1,50,0000</span>
-          </Typography>
-        </Box>
-        <Box>
-          <Typography
-            sx={{
-              fontSize: "14px",
-              px: 1,
-            }}
-          >
-            <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>Loan:</span>
-            <span style={{ color: "#00000", fontWeight: 600 }}>Car Loan</span>
-          </Typography>
-        </Box>
-        <Stack direction={"row"} sx={{ my: 1 }}>
-          <Box>
-            <Button
-              variant="outlined"
-              size={"small"}
-              sx={{
-                textTransform: "none",
-                border: "1px solid grey",
-                color: "grey",
-                ml: 1,
-                fontSize: { sm: "14px", xs: "10px" },
-              }}
-              startIcon={<CurrencyRupeeIcon sx={{ fontWeight: 600, color: "#585858" }} />}
-              endIcon={<ArrowUpwardIcon sx={{ color: "red" }} />}
-            >
-              Money Impact
-            </Button>
-          </Box>
-          <Box>
-            <Button
-              variant="outlined"
-              size={"small"}
-              sx={{
-                textTransform: "none",
-                border: "1px solid grey",
-                color: "grey",
-                ml: 1,
-                fontSize: { sm: "14px", xs: "10px" },
-              }}
-              startIcon={<TimerIcon sx={{ color: "#585858" }} />}
-              endIcon={<ArrowDownwardIcon sx={{ color: "green" }} />}
-            >
-              Urgency
-            </Button>
-          </Box>
+      <Grid item xs={12}>
+        <Stack sx={{}}>
+          <Grid container>
+            <Grid xs={11}>
+              <Box sx={{ pt: 1 }}>
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: "14px",
+                    lineHeight: "18px",
+                    color: "#535353",
+                    px: 1,
+                  }}
+                >
+                  Rakshit Walia
+                </Typography>
+              </Box>
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    px: 1,
+                  }}
+                >
+                  <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>
+                    Amount Due:
+                  </span>
+                  <span style={{ color: "#00000", fontWeight: 600 }}>₹1,50,0000</span>
+                </Typography>
+              </Box>
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    px: 1,
+                  }}
+                >
+                  <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>Loan:</span>
+                  <span style={{ color: "#00000", fontWeight: 600 }}>Car Loan</span>
+                </Typography>
+              </Box>
+            </Grid>
 
-          <Box>
-            <Button
-              variant="outlined"
-              size={"small"}
-              sx={{
-                textTransform: "none",
-                border: "1px solid grey",
-                color: "grey",
-                ml: 1,
-                fontSize: { sm: "14px", xs: "10px" },
-              }}
-              startIcon={
-                <SpeedIcon sx={{ color: "#585858", fontSize: { sm: "14px", xs: "10px" } }} />
-              }
-              endIcon={<DragHandleIcon sx={{ fontSize: { sm: "14px", xs: "10px" } }} />}
-            >
-              CIBIL 
-            </Button>
-          </Box>
+            <Grid item xs={1} sx={{}}>
+              <Box
+                sx={{ cursor: "pointer", float: "right", p: 1 }}
+                onClick={() => navigate("/loan-details")}
+              >
+                <ArrowForwardIosIcon />
+              </Box>
+            </Grid>
+          </Grid>
+
+          <Stack direction={"row"} sx={{ my: 1 }}>
+            <Box>
+              <Button
+                variant="outlined"
+                size={"small"}
+                sx={{
+                  textTransform: "none",
+                  border: "1px solid grey",
+                  color: "grey",
+                  ml: 1,
+                  fontSize: { sm: "14px", xs: "10px" },
+                }}
+                startIcon={<CurrencyRupeeIcon sx={{ fontWeight: 600, color: "#585858" }} />}
+                endIcon={<ArrowUpwardIcon sx={{ color: "red" }} />}
+              >
+                Money Impact
+              </Button>
+            </Box>
+            <Box>
+              <Button
+                variant="outlined"
+                size={"small"}
+                sx={{
+                  textTransform: "none",
+                  border: "1px solid grey",
+                  color: "grey",
+                  ml: 1,
+                  fontSize: { sm: "14px", xs: "10px" },
+                }}
+                startIcon={<TimerIcon sx={{ color: "#585858" }} />}
+                endIcon={<ArrowDownwardIcon sx={{ color: "green" }} />}
+              >
+                Urgency
+              </Button>
+            </Box>
+
+            <Box>
+              <Button
+                variant="outlined"
+                size={"small"}
+                sx={{
+                  textTransform: "none",
+                  border: "1px solid grey",
+                  color: "grey",
+                  ml: 1,
+                  fontSize: { sm: "14px", xs: "10px" },
+                }}
+                startIcon={
+                  <SpeedIcon sx={{ color: "#585858", fontSize: { sm: "14px", xs: "10px" } }} />
+                }
+                endIcon={<DragHandleIcon sx={{ fontSize: { sm: "14px", xs: "10px" } }} />}
+              >
+                CIBIL
+              </Button>
+            </Box>
+          </Stack>
         </Stack>
-        <Box></Box>
-      </Stack>
+      </Grid>
     </Grid>
   );
   return (
