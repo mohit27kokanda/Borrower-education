@@ -24,6 +24,8 @@ function App() {
               <Route exact path="/pay-now" element={<PayNow />}></Route>
               <Route exact path="/settlement" element={<Settlement />}></Route>
               <Route exact path="/report-delay" element={<ReportDelay />}></Route>
+              <Route exact path="/loan-details-approved" element={<LoanDetails />}></Route>
+              
             </Routes>
           </Router>
         </Grid>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   Divider,
@@ -32,8 +32,29 @@ import {
   Card,
 } from "@mui/material";
 
+import Dialog from "@mui/material/Dialog";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import { useNavigate } from "react-router-dom";
+
+const Transition = (props) => {
+  return <Slide direction="up" {...props} />;
+};
+
 const ReportDelay = () => {
   const options = ["Delay in Salary", "Loss in Business", "Medical Expense", "Other"];
+  const navigate = useNavigate();
+  const [isBillerOpen, setisBillerOpen] = useState(false);
+  const hideBottomBiller = () => {
+    setisBillerOpen(false);
+  };
   return (
     <Grid continer sx={{ mt: { sm: 2, xs: -2 }, mx: 2 }}>
       <Grid item xs={12}>
@@ -88,10 +109,15 @@ const ReportDelay = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <Button sx={{ float: "right", mt: 2, mr: 3 }} variant="contained">
+        <Button
+          sx={{ float: "right", mt: 2, mr: 3 }}
+          variant="contained"
+          onClick={() => navigate("/loan-details")}
+        >
           Submit
         </Button>
       </Grid>
+     
     </Grid>
   );
 };

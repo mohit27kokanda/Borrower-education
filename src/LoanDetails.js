@@ -71,6 +71,10 @@ const LoanDetails = () => {
   const [loanDetails, setLoanDetails] = useState([]);
   const userDetails = JSON.parse(localStorage.getItem("user"));
   const loanId = localStorage.getItem("loanId");
+  var url = window.location.href.indexOf("/loan-details-approved") > -1;
+  // var params = new URLSearchParams(url2.search);
+  // const url = window.location.contains("/loan-details-approved");
+  console.log("url", url);
 
   // useEffect(()=>{}, [])
 
@@ -265,12 +269,53 @@ const LoanDetails = () => {
               impact on your CIBIL Score”
             </Typography>
           </Grid>
-          
-          <Divider />
-          <Grid xs={12}>
+          {url && (
+            <Grid
+              item
+              xs={12}
+              sx={{
+                mt: 1,
+                m: 2,
+                mb: 1,
+                p: 1,
+                background: "#FAFAFA",
+                border: "1px solid #DDDDDD",
+                borderRadius: "4px",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  px: 1,
+                }}
+              >
+                <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>
+                  Settlement Amount:
+                </span>
+                <span
+                  style={{ fontSize: "22px", color: "#00000", fontWeight: 600, paddingLeft: "5px" }}
+                >
+                  ₹2,40,0000
+                </span>
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  px: 1,
+                }}
+              >
+                <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>Reason:</span>
+                <span style={{ color: "#00000", fontWeight: 600 }}>
+                  <Button sx={{ml:1}} size="small" variant="outlined" color="success">
+                    Approved
+                  </Button>
+                </span>
+              </Typography>
+            </Grid>
+          )}
 
-          
-          </Grid>
+          <Divider />
+          <Grid xs={12}></Grid>
           <Grid xs={12}>
             <Button
               sx={{ float: "right", mr: 2 }}
@@ -512,7 +557,7 @@ const LoanDetails = () => {
             </Grid>
 
             <Grid item xs={12} sx={{ textAlign: "center" }}>
-              <Button sx={{ mt: 2, mr: 3 }} variant="contained">
+              <Button onClick={hideBottomBiller} sx={{ mt: 2, mr: 3 }} variant="contained">
                 Add Biller
               </Button>
             </Grid>
