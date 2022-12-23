@@ -7,6 +7,9 @@ import AppContainer from "./AppContainer";
 import Home from "./Home";
 import { Grid } from "@mui/material";
 import LoanDetails from "./LoanDetails";
+import Settlement from "./Settlement";
+import PayNow from "./PayNow";
+import ReportDelay from "./ReportDelay";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
               <Route exact path="/" element={<AppContainer />}></Route>
               <Route exact path="/loan-details" element={<LoanDetails />}></Route>
               <Route exact path="/home" element={<Home />}></Route>
+              <Route exact path="/pay-now" element={<PayNow />}></Route>
+              <Route exact path="/settlement" element={<Settlement />}></Route>
+              <Route exact path="/report-delay" element={<ReportDelay />}></Route>
             </Routes>
           </Router>
         </Grid>

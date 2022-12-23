@@ -53,6 +53,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useNavigate } from "react-router-dom";
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
@@ -60,6 +61,8 @@ const Transition = (props) => {
 
 const LoanDetails = () => {
   const [isBottomSheetOpen, setisBottomSheetOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const data = [
     { key: "Amount Due: ", value: "₹1,50,0000" },
@@ -266,7 +269,7 @@ const LoanDetails = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItem button>
+            <ListItem button onClick={() => navigate("/pay-now")}>
               <ListItemText primary="Pay Now" />
               <IconButton
                 edge="start"
@@ -279,7 +282,7 @@ const LoanDetails = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItem button>
+            <ListItem button onClick={() => navigate("/report-delay")}>
               <ListItemText primary="Report Delay in Payment" />
               <IconButton
                 edge="start"
@@ -292,7 +295,7 @@ const LoanDetails = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItem button>
+            <ListItem button onClick={() => navigate("/settlement")}>
               <ListItemText primary="Raise Settlement Request" />
               <IconButton
                 edge="start"
