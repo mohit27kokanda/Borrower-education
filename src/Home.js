@@ -182,191 +182,194 @@ const Home = () => {
     );
   };
   return (
-    <Grid container sx={{ mt: { sm: 2, xs: -2 }, mx: 2 }}>
+    <Grid container sx={{ mt: { sm: 2, xs: -2 },px:2 }}>
       <Grid item xs={12}>
         <Typography sx={{ fontWeight: 500, fontSize: "20px" }} color="#4164AB">
           {userDetails["user_name"]}
         </Typography>
       </Grid>
-
-      <Card sx={{ mt: 2 }}>
-        <Grid container sx={{ backgroundColor: "#F3F3F3", pb: 1 }}>
-          <Grid item xs={12} sx={{ px: 2, py: 1, backgroundColor: "#fff" }}>
-            <Typography sx={{ fontWeight: 500, fontSize: "16px" }} color="#00000">
-              CIBIL SCORE - {cibilScore}
-            </Typography>
-          </Grid>
-          <Grid xs={7} sx={{ mt: 1 }}>
-            <GaugeChart
-              style={{ marginLeft: "-28px" }}
-              id="gauge-chart6"
-              percent={cibilScore / 1300}
-              nrOfLevels={5}
-              needleBaseColor="#000"
-              cornerRadius={0}
-              arcPadding={0.012}
-              arcWidth={0.7}
-              hideText={true}
-              colors={["#F15A24", "#FBB03B", "#D9E021", "#39B54A", "#006837"]}
-            />
-            <Typography sx={{ fontWeight: 400, fontSize: "12px", ml: 2 }}>
-              *CIBIL Score refresh every month
-            </Typography>
-          </Grid>
-          <Grid item xs={5} sx={{ mt: 1 }}>
-            <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
-              {" "}
-              <div
-                style={{
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "3px",
-                  backgroundColor: "#F15A24",
-                  margin: "4px 5px",
-                }}
-              ></div>
-              <span>Very Poor</span>
-            </Box>
-            <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
-              {" "}
-              <div
-                style={{
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "3px",
-                  backgroundColor: "#FBB03B",
-                  margin: "4px 5px",
-                }}
-              ></div>
-              <span>Poor</span>
-            </Box>
-            <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
-              {" "}
-              <div
-                style={{
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "3px",
-                  backgroundColor: "#D9E021",
-                  margin: "4px 5px",
-                }}
-              ></div>
-              <span>Fair</span>
-            </Box>
-            <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
-              {" "}
-              <div
-                style={{
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "3px",
-                  backgroundColor: "#39B54A",
-                  margin: "4px 5px",
-                }}
-              ></div>
-              <span>Good</span>
-            </Box>
-            <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
-              {" "}
-              <div
-                style={{
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "3px",
-                  backgroundColor: "#006837",
-                  margin: "4px 5px",
-                }}
-              ></div>
-              <span>Excellent</span>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                background: "#FFF",
-                border: "1px solid #DDDDDD",
-                borderRadius: "4px",
-                mx: 1,
-                p: 1,
-                textAlign: "center",
-              }}
-            >
-              <Typography sx={{ textAlign: "center" }}>Total Loans</Typography>
-              <Typography>{totalLoans}</Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                background: "#FFF",
-                border: "1px solid #DDDDDD",
-                borderRadius: "4px",
-                mx: 1,
-                py: 1,
-                textAlign: "center",
-              }}
-            >
-              <Typography>Total Outstanding</Typography>
-              <Typography
-                sx={{
-                  fontWeight: 600,
-                  fontSize: "18px",
-                  color: "#212121",
-                }}
-              >
-                ₹{totalOutstanding}
+      <Grid item xs={12}>
+        <Card sx={{ mt: 2 }}>
+          <Grid container sx={{ backgroundColor: "#F3F3F3", pb: 1 }}>
+            <Grid item xs={12} sx={{ px: 2, py: 1, backgroundColor: "#fff" }}>
+              <Typography sx={{ fontWeight: 500, fontSize: "16px" }} color="#00000">
+                CIBIL SCORE - {cibilScore}
               </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Card>
-      <Card sx={{ mt: 2 }}>
-        <Grid container sx={{ backgroundColor: "#F3F3F3", pb: 1 }}>
-          <Grid item xs={12} sx={{ px: 2, py: 1, backgroundColor: "#fff" }}>
-            <Typography sx={{ fontWeight: 500, fontSize: "16px" }} color="#00000">
-              EMI Overdue{" "}
-              <span
-                style={{
-                  fontWeight: 600,
-                  fontSize: "18px",
-                  color: "#212121",
-                }}
-              >
-                ₹{emiOverdue}
-              </span>
-            </Typography>
-          </Grid>
-          <Grid xs={7} sx={{ mt: 1 }}>
-            <Box sx={{ ml: 3, mb: 1, width: 120 }}>
-              <Chart pieChartData={pieChartData} />
-            </Box>
-          </Grid>
-          <Grid item xs={5} sx={{ mt: 2 }}>
-            {Object.keys(pieChartData).map((loan_type, index) => (
-              <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.5 } }}>
+            </Grid>
+            <Grid xs={7} sx={{ mt: 1 }}>
+              <GaugeChart
+                style={{ marginLeft: "-28px" }}
+                id="gauge-chart6"
+                percent={cibilScore / 1300}
+                nrOfLevels={5}
+                needleBaseColor="#000"
+                cornerRadius={0}
+                arcPadding={0.012}
+                arcWidth={0.7}
+                hideText={true}
+                colors={["#F15A24", "#FBB03B", "#D9E021", "#39B54A", "#006837"]}
+              />
+              <Typography sx={{ fontWeight: 400, fontSize: "12px", ml: 2 }}>
+                *CIBIL Score refresh every month
+              </Typography>
+            </Grid>
+            <Grid item xs={5} sx={{ mt: 1 }}>
+              <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
                 {" "}
                 <div
                   style={{
                     width: "12px",
                     height: "12px",
                     borderRadius: "3px",
-                    backgroundColor: colors[index],
+                    backgroundColor: "#F15A24",
                     margin: "4px 5px",
                   }}
                 ></div>
-                <span>{loan_type.toUpperCase()}</span>
+                <span>Very Poor</span>
               </Box>
-            ))}
+              <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
+                {" "}
+                <div
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "3px",
+                    backgroundColor: "#FBB03B",
+                    margin: "4px 5px",
+                  }}
+                ></div>
+                <span>Poor</span>
+              </Box>
+              <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
+                {" "}
+                <div
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "3px",
+                    backgroundColor: "#D9E021",
+                    margin: "4px 5px",
+                  }}
+                ></div>
+                <span>Fair</span>
+              </Box>
+              <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
+                {" "}
+                <div
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "3px",
+                    backgroundColor: "#39B54A",
+                    margin: "4px 5px",
+                  }}
+                ></div>
+                <span>Good</span>
+              </Box>
+              <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.1 } }}>
+                {" "}
+                <div
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "3px",
+                    backgroundColor: "#006837",
+                    margin: "4px 5px",
+                  }}
+                ></div>
+                <span>Excellent</span>
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
+              <Box
+                sx={{
+                  background: "#FFF",
+                  border: "1px solid #DDDDDD",
+                  borderRadius: "4px",
+                  mx: 1,
+                  p: 1,
+                  textAlign: "center",
+                }}
+              >
+                <Typography sx={{ textAlign: "center" }}>Total Loans</Typography>
+                <Typography>{totalLoans}</Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
+              <Box
+                sx={{
+                  background: "#FFF",
+                  border: "1px solid #DDDDDD",
+                  borderRadius: "4px",
+                  mx: 1,
+                  py: 1,
+                  textAlign: "center",
+                }}
+              >
+                <Typography>Total Outstanding</Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: "18px",
+                    color: "#212121",
+                  }}
+                >
+                  ₹{totalOutstanding}
+                </Typography>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={12} sx={{ p: 1 }}>
-            {loanDetails.map((loan) => {
-              return <LoanCard loan={loan} />;
-            })}
+        </Card>
+      </Grid>
+      <Grid xs={12}>
+        <Card sx={{ mt: 2 }}>
+          <Grid container sx={{ backgroundColor: "#F3F3F3", pb: 1 }}>
+            <Grid item xs={12} sx={{ px: 2, py: 1, backgroundColor: "#fff" }}>
+              <Typography sx={{ fontWeight: 500, fontSize: "16px" }} color="#00000">
+                EMI Overdue{" "}
+                <span
+                  style={{
+                    fontWeight: 600,
+                    fontSize: "18px",
+                    color: "#212121",
+                  }}
+                >
+                  ₹{emiOverdue}
+                </span>
+              </Typography>
+            </Grid>
+            <Grid xs={7} sx={{ mt: 1 }}>
+              <Box sx={{ ml: 3, mb: 1, width: 120 }}>
+                <Chart pieChartData={pieChartData} />
+              </Box>
+            </Grid>
+            <Grid item xs={5} sx={{ mt: 2 }}>
+              {Object.keys(pieChartData).map((loan_type, index) => (
+                <Box sx={{ display: "flex", mt: { sm: 1, xs: 0.5 } }}>
+                  {" "}
+                  <div
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      borderRadius: "3px",
+                      backgroundColor: colors[index],
+                      margin: "4px 5px",
+                    }}
+                  ></div>
+                  <span>{loan_type.toUpperCase()}</span>
+                </Box>
+              ))}
+            </Grid>
           </Grid>
-        </Grid>
-      </Card>
+          <Grid container>
+            <Grid item xs={12} sx={{ p: 1 }}>
+              {loanDetails.map((loan) => {
+                return <LoanCard loan={loan} />;
+              })}
+            </Grid>
+          </Grid>
+        </Card>
+      </Grid>
     </Grid>
   );
 };
