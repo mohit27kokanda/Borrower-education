@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   Drawer,
   Divider,
@@ -38,8 +38,29 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import SpeedIcon from "@mui/icons-material/Speed";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import BottomSheet from "./BottomSheet";
+
+import Dialog from "@mui/material/Dialog";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import { TransitionProps } from "@mui/material/transitions";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+
+const Transition = (props) => {
+  return <Slide direction="up" {...props} />;
+};
 
 const LoanDetails = () => {
+  const [isBottomSheetOpen, setisBottomSheetOpen] = useState(false);
+
   const data = [
     { key: "Amount Due: ", value: "₹1,50,0000" },
     { key: "Loan:  ", value: "Car Loan" },
@@ -52,6 +73,11 @@ const LoanDetails = () => {
     { key: "EMI Due Amount: ", value: "₹75,0000" },
     { key: "Due Date:  ", value: "10/Dec/2022" },
   ];
+  const hideBottom = () => {
+    setisBottomSheetOpen(false);
+  };
+
+  // const bottomSheet = () => ;
   return (
     <Grid continer sx={{ mt: { sm: 2, xs: -2 }, mx: 2 }}>
       <Grid item xs={12}>
@@ -61,20 +87,29 @@ const LoanDetails = () => {
       </Grid>
       <Card sx={{ mt: 2 }}>
         <Grid container sx={{ pb: 1 }}>
-          {data.map(({ key, value }) => (
-            <Grid item xs={12} sx={{ mt: 1 }}>
-              {" "}
-              <Typography
-                sx={{
-                  fontSize: "14px",
-                  px: 1,
-                }}
-              >
-                <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>{key}</span>
-                <span style={{ color: "#00000", fontWeight: 600 }}>{value}</span>
-              </Typography>
-            </Grid>
-          ))}
+          <Grid item xs={11}>
+            {data.map(({ key, value }) => (
+              <Grid item sx={{ mt: 1 }}>
+                {" "}
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    px: 1,
+                  }}
+                >
+                  <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>{key}</span>
+                  <span style={{ color: "#00000", fontWeight: 600 }}>{value}</span>
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+          <Grid item xs={1} sx={{ p: 1 }}>
+            <MoreVertIcon
+              onClick={() => setisBottomSheetOpen(!isBottomSheetOpen)}
+              sx={{ float: "right", cursor: "pointer" }}
+            />
+          </Grid>
+
           <Grid item xs={12} sx={{}}>
             <Stack direction={"row"} sx={{ my: 1 }}>
               <Box>
@@ -201,6 +236,77 @@ const LoanDetails = () => {
           </Grid>
         </Grid>
       </Card>
+      <Box sx={{ maxWidth: "400px" }}>
+        <Dialog
+          fullScreen
+          sx={{
+            // mt: "22rem",
+            mt: "auto",
+            mb: { sm: "3rem", xs: "0" },
+            maxWidth: { sm: "550px", xs: "100%" },
+            maxHeight: "250px",
+            mx: "auto",
+            borderRadius: "10px",
+          }}
+          open={isBottomSheetOpen}
+          onClose={hideBottom}
+          TransitionComponent={Transition}
+        >
+          <List>
+            <ListItem button>
+              <ListItemText secondary="Actions on your Loan" />
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={hideBottom}
+                sx={{ float: "right" }}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText primary="Pay Now" />
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={hideBottom}
+                sx={{ float: "right" }}
+                aria-label="close"
+              >
+                <NavigateNextIcon />
+              </IconButton>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText primary="Report Delay in Payment" />
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={hideBottom}
+                sx={{ float: "right" }}
+                aria-label="close"
+              >
+                <NavigateNextIcon />
+              </IconButton>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText primary="Raise Settlement Request" />
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={hideBottom}
+                sx={{ float: "right" }}
+                aria-label="close"
+              >
+                <NavigateNextIcon />
+              </IconButton>
+            </ListItem>
+          </List>
+        </Dialog>
+      </Box>
     </Grid>
   );
 };
