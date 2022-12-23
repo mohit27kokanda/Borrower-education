@@ -57,7 +57,7 @@ import { useNavigate } from "react-router-dom";
 import paymentImage1 from "../src/img/Frame4.svg";
 import paymentImage2 from "../src/img/Frame2.svg";
 import paymentImage3 from "../src/img/Frame3.svg";
-import { getLoanDetails } from "./service";
+import { getLoanBreakdown, getLoanDetails } from "./service";
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
@@ -77,6 +77,9 @@ const LoanDetails = () => {
   console.log("url", url);
 
   // useEffect(()=>{}, [])
+  const [isCGLoan, setIsCGLoan] = useState(false)
+  const [brakdownGraph, setBreakdownGraph] = useState()
+  const userId = JSON.parse(localStorage.getItem(user))["id"]
 
   useEffect(() => {
     console.log("useEffect");
@@ -85,12 +88,21 @@ const LoanDetails = () => {
 
   const loadPage = async (loanId) => {
     const loanData = await getLoanDetails(loanId);
-    console.log(loanData);
-    const formattedData = Object.keys(loanData || {}).map((key) => ({
-      key: snakeCaseToTitleCase(key),
-      value: loanData[key],
-    }));
-    setLoanDetails(formattedData);
+    setLoanDetails([
+      {key:"Lender", value:loanData['company_name']},
+      {key:"Product Type", value:loanData['loan_type']},
+      {key:"Total Outstanding", value: loanData["total_claim_amount"]},
+      {key:"Amount Paid", value: loanData["paid_amount"]},
+      {key:"Balance Amount", value: loanData["total_claim_amount"]},
+      {key:"Principal Outstanding", value: loanData["principal_outstanding_amount"]},
+      {key:"Interest Outstanding", value: loanData["interest_outstanding_amount"]},
+      {key:"EMI Tenure", value: loanData["tenure"]},
+      {key:"EMI Amount Due", value: loanData["emi_amount"]*loanData["emi_bounce_count"] +loanData["emi_bounce_charge"]},
+      {key:"Due Date", value: loanData["emi_due_date"]}
+    ]
+    );
+    const graphData = await getLoanBreakdown(loanId, userId)
+    if (loanData["emi_due_date"]) setIsCGLoan(true)
   };
 
   const snakeCaseToTitleCase = (str) =>
@@ -133,7 +145,7 @@ const LoanDetails = () => {
                   <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>
                     {key + ": "}
                   </span>
-                  <span style={{ color: "#00000", fontWeight: 600 }}>{value}</span>
+                  <span style={{ color: "#00000", fontWeight: 600 }}>{!!value?value:"-"}</span>
                 </Typography>
               </Grid>
             ))}
@@ -232,7 +244,7 @@ const LoanDetails = () => {
                 color: "rgba(83, 83, 83, 0.85)",
               }}
             >
-              EBC is 1 - “You have missed one EMI on this loan, pay the next EMI and you will see no
+              “You have missed one EMI on this loan, pay the next EMI and you will see no
               impact on your CIBIL Score”
             </Typography>
           </Grid>
@@ -249,25 +261,7 @@ const LoanDetails = () => {
               borderRadius: "4px",
             }}
           >
-            <Typography
-              sx={{
-                fontWeight: 400,
-                fontSize: "14px",
-                color: "#221122",
-              }}
-            >
-              CIBIL Impact
-            </Typography>
-            <Typography
-              sx={{
-                fontWeight: 400,
-                fontSize: "14px",
-                color: "rgba(83, 83, 83, 0.85)",
-              }}
-            >
-              EBC is 1 - “You have missed one EMI on this loan, pay the next EMI and you will see no
-              impact on your CIBIL Score”
-            </Typography>
+            <MiltilineChart></MiltilineChart>
           </Grid>
           {url && (
             <Grid
@@ -321,7 +315,7 @@ const LoanDetails = () => {
               sx={{ float: "right", mr: 2 }}
               variant="contained"
               onClick={() => {
-                false ? setisPayNowOpen(!isPayNowOpen) : setisBillerOpen(!isBillerOpen);
+                isCGLoan ? setisPayNowOpen(!isPayNowOpen) : setisBillerOpen(!isBillerOpen);
               }}
             >
               Pay Now
@@ -549,10 +543,9 @@ const LoanDetails = () => {
               <TextField
                 size={"small"}
                 sx={{ width: "95%", mt: 2 }}
-                type="date"
+                type="text"
                 inputProps={{ step: 300 }}
                 label={"Enter IFSC Code"}
-                InputLabelProps={{ shrink: true }}
               />
             </Grid>
 

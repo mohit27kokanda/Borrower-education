@@ -100,6 +100,30 @@ export function getLoanDetails(loanId){
     .catch(handleError({}));
 }
 
+export function getLoanBreakdown(loanId, userId){
+  const url = new URL(`${endpoint}/notice/get-loan-breakdown`)
+
+  const queryParams = {
+    'loan_id': loanId,
+    'user_id': userId
+  }
+  addQueryParams(url, queryParams)
+
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      mode: 'no-cors',
+      'ngrok-skip-browser-warning': 1
+    },
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data.message == "success") return data["data"]
+      return [];
+    })
+    .catch(handleError({}));
+}
 
 export function addQueryParams(url, params) {
   for (const [key, value] of Object.entries(params))
