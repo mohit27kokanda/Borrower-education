@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useLocation } from "react";
 import {
   Drawer,
   Divider,
@@ -57,6 +57,7 @@ import { useNavigate } from "react-router-dom";
 import paymentImage1 from "../src/img/Frame4.svg";
 import paymentImage2 from "../src/img/Frame2.svg";
 import paymentImage3 from "../src/img/Frame3.svg";
+import { getLoanDetails } from "./service";
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
@@ -67,19 +68,30 @@ const LoanDetails = () => {
   const [isPayNowOpen, setisPayNowOpen] = useState(false);
 
   const navigate = useNavigate();
+  const [loanDetails, setLoanDetails] = useState([])
+  const userDetails = JSON.parse(localStorage.getItem("user"))
+  const loanId = localStorage.getItem('loanId')
 
-  const data = [
-    { key: "Amount Due: ", value: "₹1,50,0000" },
-    { key: "Loan:  ", value: "Car Loan" },
-    { key: "Total Outstanding: ", value: "₹2,50,0000" },
-    { key: "Amount Paid:", value: "₹1,00,0000" },
-    { key: "Balance Amount:", value: "₹1,50,0000" },
-    { key: "Principal Outstanding: ", value: "Car Loan" },
-    { key: "Interest Outstanding:", value: "₹1,50,0000" },
-    { key: "EMI Tenure: ", value: "24 Months" },
-    { key: "EMI Due Amount: ", value: "₹75,0000" },
-    { key: "Due Date:  ", value: "10/Dec/2022" },
-  ];
+  // useEffect(()=>{}, [])
+
+  useEffect(() => {
+    console.log("useEffect");
+    loadPage(loanId)
+  }, [])
+  
+  const loadPage = async (loanId) => {
+    const loanData = await getLoanDetails(loanId)
+    console.log(loanData)
+    const formattedData = Object.keys(loanData ||{}).map((key)=> ({key: snakeCaseToTitleCase(key), value: loanData[key]}))
+    setLoanDetails(formattedData)
+  }
+
+  const snakeCaseToTitleCase = (str) =>
+  str
+    .split("_")
+    .map((w) => w[0].toUpperCase() + w.substr(1).toLowerCase())
+    .join(" ");
+
   const hideBottom = () => {
     setisBottomSheetOpen(false);
   };
@@ -92,13 +104,13 @@ const LoanDetails = () => {
     <Grid continer sx={{ mt: { sm: 2, xs: -2 }, mx: 2 }}>
       <Grid item xs={12}>
         <Typography sx={{ fontWeight: 500, fontSize: "20px" }} color="#4164AB">
-          Rakshit
+          {userDetails["user_name"]}
         </Typography>
       </Grid>
       <Card sx={{ mt: 2 }}>
         <Grid container sx={{ pb: 1 }}>
           <Grid item xs={11}>
-            {data.map(({ key, value }) => (
+            {loanDetails?.map(({ key, value }) => (
               <Grid item sx={{ mt: 1 }}>
                 {" "}
                 <Typography
@@ -107,7 +119,7 @@ const LoanDetails = () => {
                     px: 1,
                   }}
                 >
-                  <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>{key}</span>
+                  <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>{key+": "}</span>
                   <span style={{ color: "#00000", fontWeight: 600 }}>{value}</span>
                 </Typography>
               </Grid>

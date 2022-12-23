@@ -10,7 +10,6 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import Chart from "./Chart";
 import { getLoans } from "./service";
-import uniqolor from "uniqolor";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 
@@ -113,7 +112,7 @@ const Home = () => {
             <Grid item xs={1} sx={{}}>
               <Box
                 sx={{ cursor: "pointer", float: "right", p: 1 }}
-                onClick={() => navigate("/loan-details")}
+                onClick={() => {localStorage.setItem('loanId', loanInfo["loan_id"]);navigate('/loan-details')}}
               >
                 <ArrowForwardIosIcon />
               </Box>
