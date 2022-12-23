@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Drawer,
   Divider,
@@ -40,8 +40,8 @@ const PayNow = () => {
           Rakshit
         </Typography>
       </Grid>
-      </Grid>
-  )
-}
+    </Grid>
+  );
+};
 
-export default PayNow
+export default PayNow;

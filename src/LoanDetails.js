@@ -54,6 +54,9 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
+import paymentImage1 from "../src/img/Frame4.svg";
+import paymentImage2 from "../src/img/Frame2.svg";
+import paymentImage3 from "../src/img/Frame3.svg";
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
@@ -61,6 +64,7 @@ const Transition = (props) => {
 
 const LoanDetails = () => {
   const [isBottomSheetOpen, setisBottomSheetOpen] = useState(false);
+  const [isPayNowOpen, setisPayNowOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -78,6 +82,9 @@ const LoanDetails = () => {
   ];
   const hideBottom = () => {
     setisBottomSheetOpen(false);
+  };
+  const hideBottomPayNow = () => {
+    setisPayNowOpen(false);
   };
 
   // const bottomSheet = () => ;
@@ -237,6 +244,16 @@ const LoanDetails = () => {
               impact on your CIBIL Score”
             </Typography>
           </Grid>
+          <Divider />
+          <Grid xs={12}>
+            <Button
+              sx={{ float: "right", mr: 2 }}
+              variant="contained"
+              onClick={() => setisPayNowOpen(!isPayNowOpen)}
+            >
+              Pay Now
+            </Button>
+          </Grid>
         </Grid>
       </Card>
       <Box sx={{ maxWidth: "400px" }}>
@@ -247,7 +264,7 @@ const LoanDetails = () => {
             mt: "auto",
             mb: { sm: "3rem", xs: "0" },
             maxWidth: { sm: "550px", xs: "100%" },
-            maxHeight: "250px",
+            maxHeight: "210px",
             mx: "auto",
             borderRadius: "10px",
           }}
@@ -269,18 +286,7 @@ const LoanDetails = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItem button onClick={() => navigate("/pay-now")}>
-              <ListItemText primary="Pay Now" />
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={hideBottom}
-                sx={{ float: "right" }}
-                aria-label="close"
-              >
-                <NavigateNextIcon />
-              </IconButton>
-            </ListItem>
+
             <Divider />
             <ListItem button onClick={() => navigate("/report-delay")}>
               <ListItemText primary="Report Delay in Payment" />
@@ -308,6 +314,100 @@ const LoanDetails = () => {
               </IconButton>
             </ListItem>
           </List>
+        </Dialog>
+      </Box>
+      <Box sx={{ maxWidth: "400px" }}>
+        <Dialog
+          fullScreen
+          sx={{
+            // mt: "22rem",
+            mt: "auto",
+            mb: { sm: "3rem", xs: "0" },
+            maxWidth: { sm: "550px", xs: "100%" },
+            maxHeight: "250px",
+            mx: "auto",
+            borderRadius: "10px",
+          }}
+          open={isPayNowOpen}
+          onClose={hideBottomPayNow}
+          TransitionComponent={Transition}
+        >
+          <List>
+            <ListItem button>
+              <ListItemText secondary="Pay Now" />
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={hideBottomPayNow}
+                sx={{ float: "right" }}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+            </ListItem>
+            <Divider />
+          </List>
+          <Grid item container>
+            <Grid item xs={12} sx={{ mt: 1, m: 2, mb: 1, p: 1 }}>
+              <Typography
+                sx={{
+                  fontWeight: 500,
+                  fontSize: "16px",
+
+                  color: "#535353",
+                }}
+              >
+                Choose your mode of payment
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 400,
+                  fontSize: "14px",
+
+                  color: "#212121",
+                }}
+              >
+                Biller: LOANTAP CREDIT PRODUCTS PRIVATE LIMITED
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 400,
+                  fontSize: "14px",
+
+                  color: "#212121",
+                }}
+              >
+                Amount: ₹ 2000
+              </Typography>
+            </Grid>
+            <Grid xs={12}>
+              <Grid container>
+                <Grid xs={3}>
+                  <Button>
+                    <Box sx={{ width: { sm: "280px", xs: "200px" } }}>
+                      <img src={paymentImage1} alt="" />
+                    </Box>
+                  </Button>
+                </Grid>
+                <Grid xs={3}>
+                  {" "}
+                  <Button>
+                    <Box sx={{ width: { sm: "280px", xs: "200px" } }}>
+                      <img src={paymentImage2} alt="" />
+                    </Box>
+                  </Button>
+                </Grid>
+                <Grid xs={3}>
+                  {" "}
+                  <Button>
+                    <Box sx={{ width: { sm: "280px", xs: "200px" } }}>
+                      <img src={paymentImage3} alt="" />
+                    </Box>
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </Dialog>
       </Box>
     </Grid>
