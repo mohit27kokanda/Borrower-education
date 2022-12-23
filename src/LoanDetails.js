@@ -78,8 +78,6 @@ const LoanDetails = () => {
 
   // useEffect(()=>{}, [])
   const [isCGLoan, setIsCGLoan] = useState(false)
-  const [brakdownGraph, setBreakdownGraph] = useState()
-  const userId = JSON.parse(localStorage.getItem(user))["id"]
 
   useEffect(() => {
     console.log("useEffect");
@@ -101,7 +99,6 @@ const LoanDetails = () => {
       {key:"Due Date", value: loanData["emi_due_date"]}
     ]
     );
-    const graphData = await getLoanBreakdown(loanId, userId)
     if (loanData["emi_due_date"]) setIsCGLoan(true)
   };
 
@@ -261,7 +258,25 @@ const LoanDetails = () => {
               borderRadius: "4px",
             }}
           >
-            <MiltilineChart></MiltilineChart>
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: "14px",
+                color: "#221122",
+              }}
+            >
+              CIBIL Impact
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: "14px",
+                color: "rgba(83, 83, 83, 0.85)",
+              }}
+            >
+              “You have missed one EMI on this loan, pay the next EMI and you will see no
+              impact on your CIBIL Score”
+            </Typography>
           </Grid>
           {url && (
             <Grid
