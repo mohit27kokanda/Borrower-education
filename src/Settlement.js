@@ -1,8 +1,8 @@
 import React from 'react'
-
+import CustomizedProgressBar from './CustomizedProgressBar'
 const Settlement = () => {
   return (
-    <div>Settlement</div>
+    <div><CustomizedProgressBar value={90}/></div>
   )
 }
 
