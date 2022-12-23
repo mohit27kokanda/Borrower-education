@@ -67,7 +67,7 @@ const Home = () => {
         container
         sx={{ background: "#FAFAFA", border: "1px solid #DDDDDD", borderRadius: "4px", mt: 1 }}
       >
-        <Stack sx={{}}>
+        <Grid xs={12}>
           <Grid container>
             <Grid xs={11}>
               <Box sx={{ pt: 1 }}>
@@ -119,7 +119,9 @@ const Home = () => {
               </Box>
             </Grid>
           </Grid>
+        </Grid>
 
+        <Grid xs={12}>
           <Stack direction={"row"} sx={{ my: 1 }}>
             <Box>
               <Button
@@ -176,13 +178,14 @@ const Home = () => {
               </Button>
             </Box>
           </Stack>
-          <Box></Box>
-        </Stack>
+        </Grid>
+
+        <Box></Box>
       </Grid>
     );
   };
   return (
-    <Grid container sx={{ mt: { sm: 2, xs: -2 },px:2 }}>
+    <Grid container sx={{ mt: { sm: 2, xs: -2 }, px: 2 }}>
       <Grid item xs={12}>
         <Typography sx={{ fontWeight: 500, fontSize: "20px" }} color="#4164AB">
           {userDetails["user_name"]}
