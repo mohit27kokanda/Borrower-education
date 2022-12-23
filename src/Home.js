@@ -57,7 +57,11 @@ const Home = () => {
   const impact = (value) => {
     if (value === "high") return <ArrowUpwardIcon sx={{ color: "red" }} />;
     if (value === "low") return <ArrowDownwardIcon sx={{ color: "green" }} />;
-    if (value === "medium") return <DragHandleIcon sx={{color: "#FA8C16;", fontSize: { sm: "14px", xs: "10px" } }} />;
+    if (value === "medium")
+      return <DragHandleIcon sx={{ color: "#FA8C16;", fontSize: { sm: "14px", xs: "10px" } }} />;
+  };
+  const getProgressBar = (a, b) => {
+    return (a * 100) / b;
   };
   const LoanCard = (loan) => {
     const loanInfo = loan.loan;
@@ -182,12 +186,16 @@ const Home = () => {
           </Stack>
         </Grid>
         <Grid xs={12}>
-          <Grid container sx={{ mx:2 }}>
-            <Grid item xs={10} sx={{pt:1}}>
-              <CustomizedProgressBar value={90} />
+          <Grid container sx={{ mx: 2 }}>
+            <Grid item xs={10} sx={{ pt: 1 }}>
+              <CustomizedProgressBar
+                value={getProgressBar(loanInfo["emi_count_paid"], loanInfo["tenure"])}
+              />
             </Grid>
-            <Grid item xs={1} sx={{pb:1}}>
-              <Typography sx={{ml:1, fontSize:"16x"}}>90%</Typography>
+            <Grid item xs={1} sx={{ pb: 1 }}>
+              <Typography sx={{ ml: 1, fontSize: "16x" }}>
+                {Math.floor(getProgressBar(loanInfo["emi_count_paid"], loanInfo["tenure"]))}%
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
