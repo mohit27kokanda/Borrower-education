@@ -12,7 +12,7 @@ import Chart from "./Chart";
 import { getLoans } from "./service";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
-
+import CustomizedProgressBar from "./CustomizedProgressBar";
 const Home = () => {
   const userDetails = JSON.parse(localStorage.getItem("user"));
   const [loanDetails, setLoanDetails] = useState([]);
@@ -57,7 +57,7 @@ const Home = () => {
   const impact = (value) => {
     if (value === "high") return <ArrowUpwardIcon sx={{ color: "red" }} />;
     if (value === "low") return <ArrowDownwardIcon sx={{ color: "green" }} />;
-    if (value === "medium") return <DragHandleIcon sx={{ fontSize: { sm: "14px", xs: "10px" } }} />;
+    if (value === "medium") return <DragHandleIcon sx={{color: "#FA8C16;", fontSize: { sm: "14px", xs: "10px" } }} />;
   };
   const LoanCard = (loan) => {
     const loanInfo = loan.loan;
@@ -112,7 +112,10 @@ const Home = () => {
             <Grid item xs={1} sx={{}}>
               <Box
                 sx={{ cursor: "pointer", float: "right", p: 1 }}
-                onClick={() => {localStorage.setItem('loanId', loanInfo["loan_id"]);navigate('/loan-details')}}
+                onClick={() => {
+                  localStorage.setItem("loanId", loanInfo["loan_id"]);
+                  navigate("/loan-details");
+                }}
               >
                 <ArrowForwardIosIcon />
               </Box>
@@ -177,6 +180,16 @@ const Home = () => {
               </Button>
             </Box>
           </Stack>
+        </Grid>
+        <Grid xs={12}>
+          <Grid container sx={{ mx:2 }}>
+            <Grid item xs={10} sx={{pt:1}}>
+              <CustomizedProgressBar value={90} />
+            </Grid>
+            <Grid item xs={1} sx={{pb:1}}>
+              <Typography sx={{ml:1, fontSize:"16x"}}>90%</Typography>
+            </Grid>
+          </Grid>
         </Grid>
 
         <Box></Box>

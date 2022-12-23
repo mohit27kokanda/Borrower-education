@@ -18,6 +18,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 export default function CustomizedProgressBar({value}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
+      {console.log("ajgvqwa")}
       <BorderLinearProgress variant="determinate" value={value} />
     </Box>
   );

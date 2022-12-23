@@ -265,7 +265,12 @@ const LoanDetails = () => {
               impact on your CIBIL Score”
             </Typography>
           </Grid>
+          
           <Divider />
+          <Grid xs={12}>
+
+          
+          </Grid>
           <Grid xs={12}>
             <Button
               sx={{ float: "right", mr: 2 }}
