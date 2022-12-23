@@ -1,42 +1,34 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // import FormControlLabel from '@mui/material/FormControlLabel'
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import {
-  Drawer,
-  Divider,
   Typography,
-  Box,
-  Select,
-  InputLabel,
-  InputGroup,
-  MenuItem,
-  OutlinedInput,
-  FormControl,
-  styled,
-  InputBase,
-  Autocomplete,
   TextField,
-  Collapse,
   Checkbox,
-  FormGroup,
   FormControlLabel,
-  Switch,
   Stack,
   Grid,
-  Paper,
-  IconButton,
-  Snackbar,
-  Modal,
-  FormHelperText,
-  Tooltip,
   InputAdornment,
   Button,
 } from "@mui/material";
 import logo from "./img/Logo.svg";
+import { createUser } from "./service";
+
 const LoginApp = () => {
+
+  const [mobileNumber, setMobileNumber] = useState()
+  const [panNumber, setPanNumber] = useState()
   const navigate = useNavigate();
+
+  async function onSignUp(){
+    const userDetails = await createUser(mobileNumber, panNumber)
+    localStorage.setItem('user', JSON.stringify(userDetails))
+    navigate('/home')
+  }
+
   return (
     <div>
       <Grid container sx={{}} className="login-continer">
@@ -50,11 +42,11 @@ const LoginApp = () => {
           <Grid container sx={{ mx: 2, mt: { xs: 5, sm: 7 } }}>
             <Grid item>
               <Typography sx={{ color: " #535353", fontWeight: 500, fontSize: "20px" }}>
-                Login
+                SignUp
               </Typography>
 
               <Typography sx={{ color: "#555770;", fontWeight: 400, fontSize: "16px", mt: 1 }}>
-                Log-in and track your Loans
+                Sign-up and track your Loans
               </Typography>
             </Grid>
 
@@ -72,6 +64,9 @@ const LoginApp = () => {
                 InputProps={{
                   startAdornment: <InputAdornment position="start">+91</InputAdornment>,
                 }}
+                type="number"
+                value={mobileNumber}
+                onChange={(e)=>setMobileNumber(e.target.value)}
               />
             </Grid>
 
@@ -89,6 +84,8 @@ const LoginApp = () => {
                 InputProps={{
                   startAdornment: <InputAdornment position="start">Pan No.</InputAdornment>,
                 }}
+                value={panNumber}
+                onChange={(e)=>setPanNumber(e.target.value.toUpperCase())}
               />
             </Grid>
             <Grid xs={12} sx={{ mt: 2 }}>
@@ -109,7 +106,7 @@ const LoginApp = () => {
                       borderRadius: "2px",
                     },
                   }}
-                  placeholder="Varification Code"
+                  placeholder="Verification Code"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -135,17 +132,17 @@ const LoginApp = () => {
             <Grid item xs={12} sx={{ mt: 2 }}>
               <Typography color="#535353" gutterBottom>
                 <span style={{ color: "#555770" }}>Didn’t receive OTP?</span>
-                <span style={{ color: "#1890FF" }}>Resend OTP</span>
+                <span style={{ color: "#1890FF" }}> Resend OTP</span>
               </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: { xs: 4, sm: 6 } }}>
               <Typography gutterBottom>
-                <span style={{ color: "#555770" }}>Don’t Have an account ?</span>
-                <span style={{ color: "#1890FF" }}>Create an account</span>
+                <span style={{ color: "#555770" }}>Have an account? </span>
+                <span style={{ color: "#1890FF" }}> Login</span>
               </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 2, textAlign: "center" }}>
-              <Button onClick={()=>navigate("/home")} variant="contained" color="primary">
+              <Button onClick={()=>onSignUp()} variant="contained" color="primary">
                 Proceed
               </Button>
             </Grid>
