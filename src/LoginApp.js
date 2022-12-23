@@ -14,19 +14,18 @@ import {
   InputAdornment,
   Button,
 } from "@mui/material";
-import logo from "./img/Logo.svg";
+import logo from "./img/Logo2.svg";
 import { createUser } from "./service";
 
 const LoginApp = () => {
-
-  const [mobileNumber, setMobileNumber] = useState()
-  const [panNumber, setPanNumber] = useState()
+  const [mobileNumber, setMobileNumber] = useState();
+  const [panNumber, setPanNumber] = useState();
   const navigate = useNavigate();
 
-  async function onSignUp(){
-    const userDetails = await createUser(mobileNumber, panNumber)
-    localStorage.setItem('user', JSON.stringify(userDetails))
-    navigate('/home')
+  async function onSignUp() {
+    const userDetails = await createUser(mobileNumber, panNumber);
+    localStorage.setItem("user", JSON.stringify(userDetails));
+    navigate("/home");
   }
 
   return (
@@ -35,9 +34,7 @@ const LoginApp = () => {
         <Grid item xs={12} sx={{}}>
           <Grid sx={{ textAlign: "center" }}>
             <img style={{}} src={logo} alt="Logo" />
-            <Typography className="login-helper">
-              Avoid hassle during payments Pay all your Loans instantly!
-            </Typography>
+            <Typography className="login-helper">Everything App for Borrowers</Typography>
           </Grid>
           <Grid container sx={{ mx: 2, mt: { xs: 5, sm: 7 } }}>
             <Grid item>
@@ -66,7 +63,7 @@ const LoginApp = () => {
                 }}
                 type="number"
                 value={mobileNumber}
-                onChange={(e)=>setMobileNumber(e.target.value)}
+                onChange={(e) => setMobileNumber(e.target.value)}
               />
             </Grid>
 
@@ -85,7 +82,7 @@ const LoginApp = () => {
                   startAdornment: <InputAdornment position="start">Pan No.</InputAdornment>,
                 }}
                 value={panNumber}
-                onChange={(e)=>setPanNumber(e.target.value.toUpperCase())}
+                onChange={(e) => setPanNumber(e.target.value.toUpperCase())}
               />
             </Grid>
             <Grid xs={12} sx={{ mt: 2 }}>
@@ -142,7 +139,7 @@ const LoginApp = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} sx={{ mt: 2, textAlign: "center" }}>
-              <Button onClick={()=>onSignUp()} variant="contained" color="primary">
+              <Button onClick={() => onSignUp()} variant="contained" color="primary">
                 Proceed
               </Button>
             </Grid>
