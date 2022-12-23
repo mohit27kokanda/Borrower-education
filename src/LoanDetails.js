@@ -306,7 +306,7 @@ const LoanDetails = () => {
               >
                 <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>Reason:</span>
                 <span style={{ color: "#00000", fontWeight: 600 }}>
-                  <Button sx={{ml:1}} size="small" variant="outlined" color="success">
+                  <Button sx={{ ml: 1 }} size="small" variant="outlined" color="success">
                     Approved
                   </Button>
                 </span>
@@ -543,16 +543,6 @@ const LoanDetails = () => {
                 label={"Enter Account Number"}
                 sx={{ width: "95%", mt: 2 }}
                 type="text"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                size={"small"}
-                sx={{ width: "95%", mt: 2 }}
-                type="date"
-                inputProps={{ step: 300 }}
-                label={"Enter IFSC Code"}
-                InputLabelProps={{ shrink: true }}
               />
             </Grid>
 
