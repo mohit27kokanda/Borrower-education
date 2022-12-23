@@ -315,7 +315,7 @@ const LoanDetails = () => {
               >
                 <span style={{ color: "rgba(83, 83, 83, 0.75)", fontWeight: 400 }}>Reason:</span>
                 <span style={{ color: "#00000", fontWeight: 600 }}>
-                  <Button sx={{ml:1}} size="small" variant="outlined" color="success">
+                  <Button sx={{ ml: 1 }} size="small" variant="outlined" color="success">
                     Approved
                   </Button>
                 </span>
@@ -383,7 +383,7 @@ const LoanDetails = () => {
               </IconButton>
             </ListItem>
             <Divider />
-            <ListItem button onClick={() => navigate("/settlement")}>
+            <ListItem button onClick={() => navigate("/settlement", {principal_outstanding_amount})}>
               <ListItemText primary="Raise Settlement Request" />
               <IconButton
                 edge="start"
@@ -552,15 +552,6 @@ const LoanDetails = () => {
                 label={"Enter Account Number"}
                 sx={{ width: "95%", mt: 2 }}
                 type="text"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                size={"small"}
-                sx={{ width: "95%", mt: 2 }}
-                type="text"
-                inputProps={{ step: 300 }}
-                label={"Enter IFSC Code"}
               />
             </Grid>
 
