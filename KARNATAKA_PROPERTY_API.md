@@ -177,4 +177,17 @@ To get API credentials:
 
 ## Disclaimer
 
-The API endpoints and payload structures mentioned above are based on publicly available information and may change. Always verify with official government sources before implementation.
+**IMPORTANT**: The API endpoints and payload structures mentioned in this document are based on publicly available information about Karnataka government services. Before production use:
+
+1. **Verify API Endpoints**: Contact the respective government departments to confirm current API endpoints and availability
+2. **Register for Access**: Most government APIs require official registration and API keys
+3. **Check Terms of Service**: Ensure your use case complies with government API usage policies
+4. **Test Thoroughly**: Always test in a sandbox/development environment first
+5. **Stay Updated**: Government APIs may change; subscribe to official channels for updates
+
+For official information and API access:
+- Visit the respective government portals
+- Contact the support emails listed above
+- Check for official API documentation
+
+The implementation provided in this repository serves as a reference architecture and should be adapted based on the actual API specifications provided by Karnataka government departments.

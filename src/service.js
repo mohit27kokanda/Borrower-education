@@ -153,6 +153,15 @@ const bhoomiBASE_URL = "https://landrecords.karnataka.gov.in/service31";
  * @returns {Promise<Object>} Property owner details
  */
 export function verifyPropertyOwnerBhoomi(propertyDetails) {
+  // Validate required parameters
+  if (!propertyDetails || !propertyDetails.districtId || !propertyDetails.talukId || 
+      !propertyDetails.villageId || !propertyDetails.surveyNumber) {
+    return Promise.resolve({ 
+      success: false, 
+      error: "Missing required parameters: districtId, talukId, villageId, and surveyNumber are required" 
+    });
+  }
+
   const url = `${bhoomiBASE_URL}/rtc/getRTC`;
 
   const payload = {
@@ -199,6 +208,14 @@ const bbmpBASE_URL = "https://bbmptax.karnataka.gov.in/api";
  * @returns {Promise<Object>} Property owner details
  */
 export function verifyPropertyOwnerBBMP(propertyId) {
+  // Validate required parameter
+  if (!propertyId || propertyId.trim() === "") {
+    return Promise.resolve({ 
+      success: false, 
+      error: "Missing required parameter: propertyId is required" 
+    });
+  }
+
   const url = new URL(`${bbmpBASE_URL}/property/details`);
 
   const queryParams = {
@@ -244,6 +261,15 @@ const kaveriBASE_URL = "https://kaverionline.karnataka.gov.in/api";
  * @returns {Promise<Object>} Document and property details
  */
 export function searchPropertyDocument(documentDetails) {
+  // Validate required parameters
+  if (!documentDetails || !documentDetails.sroCode || 
+      !documentDetails.documentNumber || !documentDetails.year) {
+    return Promise.resolve({ 
+      success: false, 
+      error: "Missing required parameters: sroCode, documentNumber, and year are required" 
+    });
+  }
+
   const url = `${kaveriBASE_URL}/document/search`;
 
   const payload = {
