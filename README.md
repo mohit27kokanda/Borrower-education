@@ -116,4 +116,7 @@ For complete examples, refer to `src/propertyVerificationExample.js`.
 
 ### API Documentation
 
-Complete API documentation including endpoints, payloads, and response formats is available in [KARNATAKA_PROPERTY_API.md](./KARNATAKA_PROPERTY_API.md).
+Complete API documentation including endpoints, payloads, and response formats is available in:
+- [KARNATAKA_PROPERTY_API.md](./KARNATAKA_PROPERTY_API.md) - Detailed API documentation
+- [BBMP_PROPERTY_IDS.md](./BBMP_PROPERTY_IDS.md) - BBMP Property ID format and sample IDs for testing
+- [QUICK_START.md](./QUICK_START.md) - Quick reference guide

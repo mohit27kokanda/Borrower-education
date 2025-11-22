@@ -83,12 +83,14 @@ For properties within Bangalore Municipal Corporation limits, the BBMP Property 
 **Method:** GET
 
 ### Query Parameters
-- **propertyId**: BBMP Property ID (PID)
+- **propertyId**: BBMP Property ID (PID) - 16-digit unique identifier
 
 ### Example
 ```
-GET https://bbmptax.karnataka.gov.in/api/property/details?propertyId=1234567890
+GET https://bbmptax.karnataka.gov.in/api/property/details?propertyId=0101010100001234
 ```
+
+**Note**: See [BBMP_PROPERTY_IDS.md](./BBMP_PROPERTY_IDS.md) for sample Property IDs and format details.
 
 ### Response Format
 ```json

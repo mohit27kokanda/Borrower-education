@@ -46,7 +46,8 @@ export async function exampleBhoomiVerification() {
 export async function exampleBBMPVerification() {
   console.log("Example 2: BBMP Property Tax Verification");
   
-  const propertyId = "1234567890"; // BBMP Property ID (PID)
+  const propertyId = "0101010100001234"; // BBMP Property ID (16-digit PID)
+  // Sample IDs: 0101010100001234 (East Zone), 0301010100002345 (South Zone)
 
   try {
     const result = await verifyPropertyOwnerBBMP(propertyId);

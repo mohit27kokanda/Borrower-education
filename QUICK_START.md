@@ -55,8 +55,8 @@ if (result.success) {
 ```javascript
 import { verifyPropertyOwnerBBMP } from './service';
 
-// Bangalore property ID
-const propertyId = "1234567890";
+// Bangalore property ID (16-digit BBMP PID)
+const propertyId = "0101010100001234"; // East Zone, Ward 01 property
 
 // Verify property
 const result = await verifyPropertyOwnerBBMP(propertyId);
@@ -69,6 +69,13 @@ if (result.success) {
   console.log("Error:", result.error);
 }
 ```
+
+**Sample BBMP Property IDs for testing:**
+- `0101010100001234` - East Zone (Shivajinagar area)
+- `0301010100002345` - South Zone (Jayanagar area)
+- `0701010100008901` - Mahadevapura Zone (Whitefield area)
+
+For more sample IDs and format details, see [BBMP_PROPERTY_IDS.md](./BBMP_PROPERTY_IDS.md).
 
 ### Example 3: Search Property Document
 
