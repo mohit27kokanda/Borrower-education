@@ -136,3 +136,142 @@ export function handleError(returnValue) {
     return returnValue;
   };
 }
+
+// Karnataka Property Owner Verification API
+
+// Karnataka Bhoomi Land Records API endpoint
+const bhoomiBASE_URL = "https://landrecords.karnataka.gov.in/service31";
+
+/**
+ * Verify property owner using Karnataka Bhoomi Land Records
+ * @param {Object} propertyDetails - Property identification details
+ * @param {string} propertyDetails.districtId - District code
+ * @param {string} propertyDetails.talukId - Taluk code
+ * @param {string} propertyDetails.villageId - Village code
+ * @param {string} propertyDetails.surveyNumber - Survey number
+ * @param {string} propertyDetails.hissaNumber - Hissa number (optional)
+ * @returns {Promise<Object>} Property owner details
+ */
+export function verifyPropertyOwnerBhoomi(propertyDetails) {
+  const url = `${bhoomiBASE_URL}/rtc/getRTC`;
+
+  const payload = {
+    districtId: propertyDetails.districtId,
+    talukId: propertyDetails.talukId,
+    villageId: propertyDetails.villageId,
+    surveyNumber: propertyDetails.surveyNumber,
+    hissaNumber: propertyDetails.hissaNumber || ""
+  };
+
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data.status === "success" && data.data) {
+        return {
+          success: true,
+          ownerName: data.data.ownerName,
+          fatherName: data.data.fatherName,
+          surveyNumber: data.data.surveyNumber,
+          hissaNumber: data.data.hissaNumber,
+          landExtent: data.data.landExtent,
+          classification: data.data.classification,
+          cultivation: data.data.cultivation
+        };
+      }
+      return { success: false, error: "Property details not found" };
+    })
+    .catch(handleError({ success: false, error: "API request failed" }));
+}
+
+// BBMP Property Tax API endpoint (for Bangalore properties)
+const bbmpBASE_URL = "https://bbmptax.karnataka.gov.in/api";
+
+/**
+ * Verify property owner using BBMP Property Tax records (Bangalore only)
+ * @param {string} propertyId - BBMP Property ID (PID)
+ * @returns {Promise<Object>} Property owner details
+ */
+export function verifyPropertyOwnerBBMP(propertyId) {
+  const url = new URL(`${bbmpBASE_URL}/property/details`);
+
+  const queryParams = {
+    propertyId: propertyId
+  };
+
+  addQueryParams(url, queryParams);
+
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    }
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data && data.propertyId) {
+        return {
+          success: true,
+          propertyId: data.propertyId,
+          ownerName: data.ownerName,
+          address: data.address,
+          zone: data.zone,
+          ward: data.ward,
+          propertyType: data.propertyType,
+          builtUpArea: data.builtUpArea
+        };
+      }
+      return { success: false, error: "Property not found" };
+    })
+    .catch(handleError({ success: false, error: "API request failed" }));
+}
+
+// KAVERI e-Registration API endpoint
+const kaveriBASE_URL = "https://kaverionline.karnataka.gov.in/api";
+
+/**
+ * Search property document using KAVERI e-Registration
+ * @param {Object} documentDetails - Document search details
+ * @param {string} documentDetails.sroCode - Sub-Registrar Office code
+ * @param {string} documentDetails.documentNumber - Registration document number
+ * @param {string} documentDetails.year - Year of registration
+ * @returns {Promise<Object>} Document and property details
+ */
+export function searchPropertyDocument(documentDetails) {
+  const url = `${kaveriBASE_URL}/document/search`;
+
+  const payload = {
+    sroCode: documentDetails.sroCode,
+    documentNumber: documentDetails.documentNumber,
+    year: documentDetails.year
+  };
+
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data && data.documentNumber) {
+        return {
+          success: true,
+          documentNumber: data.documentNumber,
+          registrationDate: data.registrationDate,
+          partyDetails: data.partyDetails,
+          propertyDetails: data.propertyDetails
+        };
+      }
+      return { success: false, error: "Document not found" };
+    })
+    .catch(handleError({ success: false, error: "API request failed" }));
+}
