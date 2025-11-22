@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# Borrower Education App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Features
+
+- User authentication and loan management
+- Loan details and breakdown visualization
+- Payment and settlement options
+- **Property Owner Verification (Karnataka State)** - New feature for verifying property ownership using Karnataka government APIs
 
 ## Available Scripts
 
@@ -68,3 +75,48 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Property Owner Verification (Karnataka State)
+
+This application includes integration with Karnataka government APIs for property owner name verification. See [KARNATAKA_PROPERTY_API.md](./KARNATAKA_PROPERTY_API.md) for detailed documentation.
+
+### Available APIs
+
+1. **Karnataka Bhoomi (Land Records)** - For rural land and property verification
+2. **BBMP Property Tax** - For Bangalore Municipal Corporation area properties
+3. **KAVERI e-Registration** - For property document verification
+
+### Usage
+
+The property verification functions are available in `src/service.js`:
+
+```javascript
+import {
+  verifyPropertyOwnerBhoomi,
+  verifyPropertyOwnerBBMP,
+  searchPropertyDocument
+} from './service';
+
+// Example: Verify property using Bhoomi API
+const propertyDetails = {
+  districtId: "01",
+  talukId: "001",
+  villageId: "0001",
+  surveyNumber: "123",
+  hissaNumber: "1"
+};
+
+const result = await verifyPropertyOwnerBhoomi(propertyDetails);
+if (result.success) {
+  console.log("Owner Name:", result.ownerName);
+}
+```
+
+For complete examples, refer to `src/propertyVerificationExample.js`.
+
+### API Documentation
+
+Complete API documentation including endpoints, payloads, and response formats is available in:
+- [KARNATAKA_PROPERTY_API.md](./KARNATAKA_PROPERTY_API.md) - Detailed API documentation
+- [BBMP_PROPERTY_IDS.md](./BBMP_PROPERTY_IDS.md) - BBMP Property ID format and sample IDs for testing
+- [QUICK_START.md](./QUICK_START.md) - Quick reference guide
